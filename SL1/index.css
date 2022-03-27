@@ -1,0 +1,19 @@
+.title{
+    text-align: center;
+    width: 100%;
+    height: 75px;
+}
+
+.headline{
+    font-size: 30px;
+    height: 40px;
+    text-align: center;
+}
+
+.lusia{
+    width: 100%;
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    font-size: 25px;
+}
