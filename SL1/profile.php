@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    include("config.php");
+    $username = $_SESSION['username'];
+    $str_query = "select*from datauser where username='$username'";
+    $query = mysqli_query($connection, $str_query);
+    $data = mysqli_fetch_array($query);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="profile.css">
-    <title>Register</title>
+    <title>Profile</title>
 </head>
 <body>
     <div class="header">
@@ -22,38 +29,38 @@
     </div>
     <div class="tabel">
         <table>
-            <caption>Register<caption>
+            <caption>Profile <a href="editProfile.php">edit</a><caption>
             <tr>
                 <td>Nama Depan</td>
-                <td><?php echo $_SESSION['usernameSession'] ?></td>
+                <td><?php echo $data['namaDepan']; ?></td>
                 <td>Nama Tengah</td>
-                <td><?php echo $_SESSION['tengahSession']; ?></td>
+                <td><?php echo $data['namaDepan']; ?></td>
                 <td>Nama Belakang</td>
-                <td><?php echo $_SESSION['belakangSession']; ?></td>
+                <td><?php echo $data['namaBelakang']; ?></td>
             </tr>
             <tr>
                 <td>Tempat Lahir</td>
-                <td><?php echo $_SESSION['tempatSession']; ?></td>
+                <td><?php echo $data['tempatLahir']; ?></td>
                 <td>Tgl Lahir</td>
-                <td><?php echo $_SESSION['tanggalSession']; ?></td>
+                <td><?php echo $data['tanggalLahir']; ?></td>
                 <td>NIK</td>
-                <td><?php echo $_SESSION['nikSession']; ?></td>
+                <td><?php echo $data['nik']; ?></td>
             </tr>
             <tr>
                 <td>Warga Negara</td>
-                <td><?php echo $_SESSION['wargaSession']; ?></td>
+                <td><?php echo $data['wargaNegara']; ?></td>
                 <td>Email</td>
-                <td><?php echo $_SESSION['emailSession']; ?></td>
+                <td><?php echo $data['email']; ?></td>
                 <td>No HP</td>
-                <td><?php echo $_SESSION['hpSession']; ?></td>
+                <td><?php echo $data['noHp']; ?></td>
             </tr>
             <tr>
                 <td>Alamat</td>
-                <td><?php echo $_SESSION['alamatSession']; ?></td>
+                <td><?php echo $data['alamat']; ?></td>
                 <td>Kode Pos</td>
-                <td><?php echo $_SESSION['posSession']; ?></td>
+                <td><?php echo $data['kodePos']; ?></td>
                 <td>Foto Profil</td>
-                <td><img src="upload/<?php echo $_SESSION["fotoSession"]?>" width ="300px"></td>
+                <td><img src="<?php echo $data["fotoProfil"]?>" width ="300px"></td>
             </tr>
         </table>
     </div>

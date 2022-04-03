@@ -1,5 +1,6 @@
-<?php
-session_start();
+<?php 
+    session_start(); 
+    include("config.php");
 ?>
 
 <!DOCTYPE html>
@@ -30,10 +31,14 @@ session_start();
                 <input type="submit" name="login" value="Login">
             </td>
             <td>
-                <input type="submit" name="kembali" value="Kembali">
+                <a href="index.php">kembali</a>
             </td>
             </tr>
         </table>
+        <?php
+            $str_query = "select*from datauser";
+            $query = mysqli_query($connection, $str_query);
+        ?>
     </div>
     </form>
 </body>

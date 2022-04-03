@@ -1,5 +1,13 @@
-<?php
-    session_start();
+<?php 
+    session_start(); 
+    include("config.php");
+    $username = $_SESSION['username'];
+    $str_query = "select*from datauser where username='$username'";
+    $query = mysqli_query($connection, $str_query);
+    $data = mysqli_fetch_array($query);
+    $depan = $data['namaDepan'];
+    $tengah = $data['namaTengah'];
+    $belakang = $data['namaBelakang'];
 ?>
 
 <!DOCTYPE html>
@@ -23,16 +31,7 @@
         </div>
     </div>
     <div class="content">
-        <?php
-            if(isset($_SESSION['usernameSession'])!=""){
-        ?>
-            Halo <?php echo $_SESSION['depanSession']." ".$_SESSION['tengahSession']." ".$_SESSION['belakangSession'] ?>, Selamat datang di Aplikasi Pengelolaan Keuangan
-        <?php
-            }
-            else{
-                echo "<h1>Halo Selamat Datang, Silahkan login telebih dahulu</h1>";
-            }
-        ?>
+        Halo <?php echo $depan." ".$tengah." ".$belakang ?>, Selamat datang di Aplikasi Pengelolaan Keuangan
     </div>
 
 </body>

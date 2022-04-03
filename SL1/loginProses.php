@@ -1,18 +1,24 @@
 <?php
     session_start();
+    include("config.php");
+    // var_dump($_POST);
     if(isset($_POST['login'])){
-        if($_POST['username']==$_SESSION['usernameSession'] && $_POST['password']==$_SESSION['passwordSession']){
-            // echo $_POST['username']."-";
-            // echo $_POST['password']."-";
-            // echo $_SESSION['usernameSession']."-";
-            // echo $_SESSION['passwordSession'];
+        $username = $_POST['username'];
+        $str_query = "select*from datauser where username='$username'";
+        $query = mysqli_query($connection, $str_query);
+        $data = mysqli_fetch_array($query);
+        // var_dump($data);
+        // echo $_POST['password']."-".$data['password'];
+        if($_POST['password']==$data['password']){
+            $_SESSION["username"] = $data['username'];
             header("location:home.php");
         }
         else{
             header("location:login.php");
         }
+        
     }
     if(isset($_POST['kembali'])){
-        header("location:index.php");
+        // header("location:index.php");
     }
 ?>

@@ -1,10 +1,29 @@
 <?php
 session_start();
+include("config.php");
 $nameErr = $wargaErr = $tempatErr = $tanggalErr = $userErr = $passErr = $nikErr = $emailErr = $hpErr = $alamatErr = $posErr = $fotoErr = "";
 $name1 = $name2 = $name3 = $warga = $nik = $email = $hp = $alamattest = $pos = $fotoProfil = $tempat = $tanggal = $password1 = $password2 = $username = "";
+$username = $password = $warga = $nik = $email = $hp = $alamattest = $foto = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $nameErr = $wargaErr = $tempatErr = $tanggalErr = $userErr = $passErr = $nikErr = $emailErr = $hpErr = $alamatErr = $posErr = $fotoErr = "";
+  $username = $_POST["username"];
+  $password = $_POST['Pass1'];
+  $warga = $_POST['WargaNegara'];
+  $nik = $_POST['NIK'];
+  $email = $_POST['Email'];
+  $hp = $_POST['NoHP'];
+  $namaDepan = $_POST['NamaDepan'];
+  $namaTengah = $_POST['NamaTengah'];
+  $namaBelakang = $_POST['NamaBelakang'];
+  $alamattest = $_POST['Alamat'];
+  $tempat = $_POST['TempatLahir'];
+  $tanggal = $_POST['TanggalLahir'];
+  $pos = $_POST['KodePos'];
+  $foto = $_FILES['fotoProfil'];
+  $fotoProfil = $_FILES['fotoProfil']['name'];
+  $tempName = $_FILES['fotoProfil']['tmp_name'];
+  
   $name1 = test_input($_POST["NamaDepan"]);
   $name2 = test_input($_POST["NamaDepan"]);
   $name3 = test_input($_POST["NamaDepan"]);
@@ -122,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
-$username = $password = $warga = $nik = $email = $hp = $alamattest = "";
+$username = $password = $warga = $nik = $email = $hp = $alamattest = $foto = "";
 if(isset($_POST['Register']) && $nameErr == "" && $wargaErr == "" && $tempatErr == "" && $tanggalErr == "" && $userErr == "" && $passErr == "" && $nikErr == "" && $emailErr == "" && $hpErr == "" && $alamatErr == "" && $posErr == "" && $fotoErr == ""){
   // echo "halo lusia kintanswari";
   $username = $_POST["username"];
@@ -138,8 +157,10 @@ if(isset($_POST['Register']) && $nameErr == "" && $wargaErr == "" && $tempatErr 
   $tempat = $_POST['TempatLahir'];
   $tanggal = $_POST['TanggalLahir'];
   $pos = $_POST['KodePos'];
+  $foto = $_FILES['fotoProfil'];
   $fotoProfil = $_FILES['fotoProfil']['name'];
   $tempName = $_FILES['fotoProfil']['tmp_name'];
+  
 
   $dirTujuan = "upload/";
 
@@ -161,6 +182,10 @@ if(isset($_POST['Register']) && $nameErr == "" && $wargaErr == "" && $tempatErr 
   $_SESSION['fotoSession'] = $fotoProfil;
 
     // echo $_SESSION['usernameSession'];
+
+  $str_query = "insert into datauser values('', '".$namaDepan."', '".$namaTengah."', '".$namaBelakang."', '".$tempat."', '".$tanggal."', '".$nik."', '".$warga."', '".$email."', '".$hp."', '".$alamattest."', '".$pos."', '".$dirTujuan.$fotoProfil."', '".$username."', '".$password."')";
+
+  $query = mysqli_query($connection, $str_query);
 
   header("location:index.php");
 }

@@ -1,6 +1,7 @@
-<?php session_start();
+<?php 
+    session_start(); 
+    include("config.php");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,5 +28,9 @@
             </td>
         </table>
     </div>
+    <?php
+        $str_query = "select*from datauser";
+        $query = mysqli_query($connection, $str_query);
+    ?>
 </body>
 </html>
